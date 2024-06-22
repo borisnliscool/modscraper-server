@@ -1,8 +1,10 @@
 use axum::{Json, Router};
 use axum::extract::{Path, Query};
-use axum::http::StatusCode;
+use axum::http::{HeaderValue, StatusCode};
 use axum::routing::get;
 use serde::{Deserialize, Serialize};
+use tower::ServiceBuilder;
+use tower_http::cors::{Any, CorsLayer};
 
 use crate::CLIENT;
 use crate::models::GameMod;
@@ -58,7 +60,13 @@ async fn get_mod(Path(mod_id): Path<String>) -> Result<Json<GameMod>, StatusCode
 }
 
 pub fn create() -> Router {
+    let cors = CorsLayer::new()
+        .allow_origin("*".parse::<HeaderValue>().unwrap())
+        .allow_methods(Any)
+        .allow_headers(Any);
+
     Router::new()
         .route("/search", get(search))
         .route("/mod/:mod_id", get(get_mod))
+        .layer(ServiceBuilder::new().layer(cors))
 }
