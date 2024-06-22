@@ -85,13 +85,13 @@ async fn main() {
 
     let address = format!(
         "{}:{}",
-        env::var("MODSCRAPER_PORT").unwrap_or(8080.to_string()),
+        env::var("MODSCRAPER_PORT").unwrap_or(3000.to_string()),
         env::var("MODSCRAPER_HOST").unwrap_or("server".to_string())
     );
 
     println!("Starting server on {}", address);
 
-    let listener = TcpListener::bind(address).await.expect("Failed to bind to port 8080");
+    let listener = TcpListener::bind(address.trim()).await.expect("Failed to bind to port 8080");
 
     let router = server::create();
     axum::serve(listener, router).await.expect("Failed to start server");
