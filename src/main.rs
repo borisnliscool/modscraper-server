@@ -85,8 +85,8 @@ async fn main() {
 
     let address = format!(
         "{}:{}",
+        env::var("MODSCRAPER_HOST").unwrap_or("server".to_string()),
         env::var("MODSCRAPER_PORT").unwrap_or(3000.to_string()),
-        env::var("MODSCRAPER_HOST").unwrap_or("server".to_string())
     );
 
     println!("Starting server on {}", address);
