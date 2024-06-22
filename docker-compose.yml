@@ -3,6 +3,7 @@ services:
     image: getmeili/meilisearch:v1.8
     environment:
       - MEILI_ENV=production
+      - MEILI_NO_ANALYTICS=true
     env_file:
       - .env
 
