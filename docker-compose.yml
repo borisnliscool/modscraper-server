@@ -1,0 +1,19 @@
+services:
+  search:
+    image: getmeili/meilisearch:v1.8
+    environment:
+      - MEILI_ENV=production
+    env_file:
+      - .env
+
+  server:
+    build: .
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ./assets:/assets
+    env_file:
+      - .env
+    depends_on:
+      - search

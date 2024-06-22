@@ -1,0 +1,7 @@
+services:
+  search:
+    image: getmeili/meilisearch:v1.8
+    ports:
+      - 7700:7700
+    env_file:
+      - .env

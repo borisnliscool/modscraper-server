@@ -1,0 +1,1 @@
+git stash && git pull && git stash pop && docker compose up -d --build --force-recreate
