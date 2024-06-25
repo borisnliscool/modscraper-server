@@ -74,7 +74,7 @@ async fn setup() -> Result<Index, String> {
     Ok(mods_index)
 }
 
-#[tokio::main(flavor = "current_thread")]
+#[tokio::main]
 async fn main() {
     dotenv().ok();
 
